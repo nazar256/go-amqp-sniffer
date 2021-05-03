@@ -1,0 +1,18 @@
+version: "2.4"
+
+services:
+  rabbit:
+    image: rabbitmq:management
+    hostname: rabbit
+    mem_limit: 512M
+    memswap_limit: 512M
+    ports:
+    - 15672:15672
+    - 5672:5672
+
+  mongo:
+    command: --wiredTigerCacheSizeGB 0.1
+    container_name: go-amqp-sniffer-mongo
+    image: mongo
+    mem_limit: 128M
+    memswap_limit: 128M
