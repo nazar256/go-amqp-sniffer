@@ -79,7 +79,7 @@ func Sniff(ctx context.Context, wg *sync.WaitGroup, listener Listener, out io.Wr
 					log.Fatalf("Failed to parse body %s, %s", amqpMsg.Body, unmarshalErr)
 				}
 			}
-			if !cfg.Parse || unmarshalErr != nil {
+			if !cfg.Parse || cfg.OutputFormat == CSV || unmarshalErr != nil {
 				record.Payload = string(amqpMsg.Body)
 			}
 
@@ -97,15 +97,7 @@ func Sniff(ctx context.Context, wg *sync.WaitGroup, listener Listener, out io.Wr
 			return line
 		})
 
-	// feed the pipeline with amqp message batches
-	go func() {
-		for amqpMsg := range listener.Listen() {
-			wg.Add(1)
-			pipeline.Push(amqpMsg)
-		}
-
-		pipeline.Close()
-	}()
+	bindListenerToPipeline(listener, wg, pipeline)
 
 	// executes pipeline until its input is closed)
 	for line := range pipeline.Out() {
@@ -114,4 +106,15 @@ func Sniff(ctx context.Context, wg *sync.WaitGroup, listener Listener, out io.Wr
 		flow.FailOnError(err, "Failed to write to output")
 		wg.Done()
 	}
+}
+
+func bindListenerToPipeline(listener Listener, wg *sync.WaitGroup, pipeline *parapipe.Pipeline) {
+	go func() {
+		for amqpMsg := range listener.Listen() {
+			wg.Add(1)
+			pipeline.Push(amqpMsg)
+		}
+
+		pipeline.Close()
+	}()
 }

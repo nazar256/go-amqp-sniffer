@@ -1,8 +1,6 @@
 package cmd
 
 import (
-	"log"
-
 	"github.com/spf13/cobra"
 )
 
@@ -13,6 +11,4 @@ func Execute() {
 	rootCmd.AddCommand(initDoc(rootCmd))
 
 	cobra.CheckErr(rootCmd.Execute())
-
-	log.Println("Sniffer is stopped.")
 }

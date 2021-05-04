@@ -50,14 +50,14 @@ The most flexible format is JSON. It's compatible with mongoimport`,
 		"Exchange to listen events from",
 	)
 
+	err := rootCmd.MarkFlagRequired(flagExchange)
+	flow.FailOnError(err, "failed to mark exchange flag as required")
+
 	rootCmd.Flags().StringSlice(
 		flagRoutingKey,
 		[]string{"#"},
 		"Routing keys to subscribe. Default is # which subscribes for all events on topic exchange",
 	)
-
-	err := rootCmd.MarkFlagRequired("routing-key")
-	flow.FailOnError(err, "failed to make routing-key as required")
 
 	rootCmd.Flags().String(
 		flagListenQueue,
@@ -80,7 +80,7 @@ The most flexible format is JSON. It's compatible with mongoimport`,
 	rootCmd.Flags().Bool(
 		flagParseJSON,
 		false,
-		"parse content body as JSON",
+		"parse content body as JSON, does not have effect with --format csv",
 	)
 
 	rootCmd.Flags().Bool(
@@ -149,6 +149,8 @@ func runRoot(cmd *cobra.Command, _ []string) error {
 	})
 
 	wg.Wait()
+
+	log.Println("Sniffer is stopped.")
 
 	return nil
 }

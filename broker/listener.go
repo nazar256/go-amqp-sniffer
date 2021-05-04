@@ -41,8 +41,8 @@ func NewListener(cfg *Config) *Listener {
 	queue, err := ch.QueueDeclare(
 		cfg.QueueName,
 		cfg.PersistentQueue,  // durable
-		!cfg.PersistentQueue, // delete when usused
-		true,                 // exclusive
+		!cfg.PersistentQueue, // delete when unused
+		!cfg.PersistentQueue, // exclusive
 		false,                // noWait
 		nil,                  // arguments
 	)
