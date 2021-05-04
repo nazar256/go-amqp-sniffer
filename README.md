@@ -27,7 +27,7 @@ go install github.com/nazar256/go-amqp-sniffer@latest
 
 ### From pre-compiled binaries
 
-Check out the release page, there you may find a zipped binary for your platform.
+Check out the [release page](https://github.com/nazar256/go-amqp-sniffer/releases), there you may find a zipped binary for your platform.
 
 Features
 --------
