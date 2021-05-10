@@ -23,7 +23,7 @@ linters-settings:
     disabled-checks:
       - dupImport # https://github.com/go-critic/go-critic/issues/845
   gocyclo:
-    min-complexity: 11
+    min-complexity: 10
   goimports:
     local-prefixes: github.com/golangci/golangci-lint
   lll:
@@ -96,11 +96,11 @@ linters:
     - makezero
     - predeclared
     - tparallel
+    - godot
   disable:
     - exhaustivestruct
     - paralleltest
     - bodyclose
-    - godot
     - ifshort
     - noctx
     - sqlclosecheck
