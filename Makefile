@@ -15,6 +15,7 @@ test: vendor
 	go test -v  -race -timeout 5s ./...
 
 lint:
+	go vet ./...
 	golangci-lint run ./... --fix
 
 run:
