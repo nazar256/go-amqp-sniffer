@@ -22,7 +22,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ~/vendor
-        key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+        key: ${{ runner.os }}-${{ hashFiles('**/go.sum') }}
 
     - name: Download vendors
       run: go mod vendor
