@@ -1,5 +1,10 @@
 go-amqp-sniffer
 ===============
+
+[![tests](https://github.com/nazar256/go-amqp-sniffer/actions/workflows/tests.yml/badge.svg)](https://github.com/nazar256/go-amqp-sniffer/actions/workflows/tests.yml)
+[![linters](https://github.com/nazar256/go-amqp-sniffer/actions/workflows/linters.yml/badge.svg)](https://github.com/nazar256/go-amqp-sniffer/actions/workflows/linters.yml)
+[![codecov](https://codecov.io/gh/nazar256/go-amqp-sniffer/branch/main/graph/badge.svg?token=AVVR5Y22VK)](https://codecov.io/gh/nazar256/go-amqp-sniffer)
+
 AMQP exchange sniffer written in golang. Subscribes for events and dumps them in requested format (csv, json) to stdout.
 
 Have you ever wondered what messages are passing by in your RabbitMQ?

@@ -15,10 +15,13 @@ import (
 	"github.com/streadway/amqp"
 )
 
+// Format indicates stream rows format like JSON or CSV.
 type Format int
 
 const (
+	// JSON stands for JavaScript Object Notation, mongoimport compatible.
 	JSON Format = iota
+	// CSV stands for comma separated values.
 	CSV
 )
 
